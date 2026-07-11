@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'activities/style.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}Youth Summer{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'activity_list' %}">Activities</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'my_score' %}">My Score</a>
+                {% if user.is_staff %}
+                    <a href="{% url 'admin_dashboard' %}">Admin panel</a>
+                {% endif %}
+                <span class="nav-user">Hi, {{ user.username }}</span>
+                <form action="{% url 'logout' %}" method="post" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="link-button">Log out</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Log in</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main class="main-cont">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'activities/base.html' %}
+
+{% block title %}Admin panel{% endblock %}
+
+{% block content %}
+    <h1 class="main-heading">Admin panel</h1>
+
+    <div class="admin-links">
+        <a href="{% url 'admin_activity_create' %}" class="btn">+ New activity</a>
+        <a href="{% url 'admin_account_list' %}" class="btn">Manage accounts</a>
+    </div>
+
+    <h3>Activities</h3>
+    {% if activities %}
+        <table class="admin-table">
+            <tr>
+                <th>Name</th>
+                <th>Week</th>
+                <th>Points</th>
+                <th>Spots</th>
+                <th></th>
+            </tr>
+            {% for activity in activities %}
+                <tr>
+                    <td>{{ activity.name }}</td>
+                    <td>{{ activity.week_date }}</td>
+                    <td>{{ activity.points }}</td>
+                    <td>{{ activity.spots_taken }} / {{ activity.max_participants }}</td>
+                    <td class="admin-row-actions">
+                        <a href="{% url 'admin_activity_edit' activity.id %}">Edit</a>
+                        <a href="{% url 'admin_activity_delete' activity.id %}" class="danger-link">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No activities yet.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'activities/base.html' %}
+
+{% block title %}Youth Summer{% endblock %}
+
+{% block content %}
+    <h1 class="main-heading">Choose Your Activity</h1>
+    <h3>Available This Week</h3>
+
+    <div class="act-grid">
+        {% for activity in activities %}
+            <div class="act-contents {% if activity.is_full %}full{% endif %}">
+                <p>{{ activity.name }}</p>
+                <p>score: {{ activity.points }}</p>
+                <p class="spots">{{ activity.spots_taken }} / {{ activity.max_participants }} spots filled</p>
+
+                {% if user.is_authenticated %}
+                    {% if activity.id in my_enrolled_ids %}
+                        <form action="{% url 'unenroll' activity.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Leave</button>
+                        </form>
+                    {% elif activity.is_full %}
+                        <button disabled>Full</button>
+                    {% else %}
+                        <form action="{% url 'enroll' activity.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">In</button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}"><button type="button">Log in to enroll</button></a>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No activities have been added yet. Check back soon!</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'activities/base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+    <h1 class="main-heading">Log In</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log In</button>
+    </form>
+
+    {% if form.errors %}
+        <p class="error">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+{% endblock %}

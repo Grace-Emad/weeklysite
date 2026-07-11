@@ -1,0 +1,14 @@
+{% extends 'activities/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1 class="main-heading">{{ title }}</h1>
+
+    <form method="post" class="admin-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save</button>
+        <a href="{% url 'admin_dashboard' %}">Cancel</a>
+    </form>
+{% endblock %}

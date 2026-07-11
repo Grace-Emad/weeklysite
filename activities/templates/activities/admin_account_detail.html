@@ -1,0 +1,30 @@
+{% extends 'activities/base.html' %}
+
+{% block title %}Manage {{ account.username }}{% endblock %}
+
+{% block content %}
+    <h1 class="main-heading">Manage {{ account.username }}</h1>
+
+    <form method="post" class="admin-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <h3>Enrolled activities</h3>
+        <ul class="admin-checklist">
+            {% for activity in all_activities %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="activities" value="{{ activity.id }}"
+                            {% if activity.id in enrolled_ids %}checked{% endif %}>
+                        {{ activity.name }} ({{ activity.week_date }}) - {{ activity.points }} pts
+                    </label>
+                </li>
+            {% empty %}
+                <li>No activities exist yet.</li>
+            {% endfor %}
+        </ul>
+
+        <button type="submit" class="btn">Save changes</button>
+        <a href="{% url 'admin_account_list' %}">Cancel</a>
+    </form>
+{% endblock %}

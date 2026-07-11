@@ -1,0 +1,233 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration:none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 38px;
+    letter-spacing: -1px;
+    line-height: 1.2;
+}
+
+p {
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.main-cont {
+    text-align: center;
+    margin-top: 100px;
+    box-sizing: border-box;
+}
+
+.main-heading {
+    font-weight: 700;
+    margin-bottom: 2em;
+}
+
+.act-grid {
+    margin-top: 5rem;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    gap: 2rem;
+    grid-auto-flow: column;
+}
+
+.act-contents {
+    min-width: 200px;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ---- added: nav, forms, buttons, admin pages, messages ---- */
+
+header {
+    background: #222;
+    padding: 12px 24px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+header nav a, header nav .link-button {
+    color: #eee;
+    font-size: 14px;
+}
+
+header nav a:hover, header nav .link-button:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.nav-user {
+    color: #aaa;
+    font-size: 14px;
+    margin-left: auto;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+}
+
+.btn {
+    display: inline-block;
+    background: #222;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #444;
+}
+
+.danger-btn {
+    background: #b23b3b;
+}
+
+.danger-btn:hover {
+    background: #8f2e2e;
+}
+
+.danger-link {
+    color: #b23b3b;
+}
+
+.act-contents button {
+    background: #222;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.act-contents button:hover {
+    background: #444;
+}
+
+.act-contents button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.admin-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.admin-table {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.admin-table th, .admin-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-row-actions a {
+    margin-right: 12px;
+    color: #222;
+}
+
+.admin-form {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.admin-form p {
+    margin-bottom: 1rem;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="password"],
+.admin-form input[type="date"],
+.admin-form input[type="number"],
+.admin-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.admin-checklist {
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto 1.5rem;
+}
+
+.admin-checklist li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.spots {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.score {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.messages {
+    max-width: 500px;
+    margin: 1rem auto;
+}
+
+.messages li {
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    background: #eee;
+    font-size: 14px;
+}
+
+.messages li.success { background: #dcf3df; }
+.messages li.error { background: #fbdada; }
+.messages li.info { background: #dbeaf7; }
