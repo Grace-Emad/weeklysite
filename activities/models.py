@@ -25,6 +25,8 @@ class Activity(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     week_date = models.DateField(help_text="Which week/date this activity is for")
+    start_time = models.TimeField(blank=True, null=True, help_text="What time this activity starts")
+    end_time = models.TimeField(blank=True, null=True, help_text="What time this activity ends")
     max_participants = models.PositiveIntegerField(default=4)
     points = models.PositiveIntegerField(default=0, help_text="Points a user earns for enrolling in this activity")
     created_at = models.DateTimeField(auto_now_add=True)

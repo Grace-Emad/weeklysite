@@ -10,12 +10,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: change this before deploying anywhere public!
-SECRET_KEY = 'django-insecure-change-me-before-deploying'
+SECRET_KEY = 'wiRAhXNTWI9SVG4MO8cc9wnIcHysckIUhAfGUJZyLJtvLt0Ui1tiTBKI8hL7ZyBR-Bs'
 
 # SECURITY WARNING: don't run with DEBUG = True in production.
 DEBUG = True
-
-ALLOWED_HOSTS = ['*']  # tighten this before deploying for real
+ALLOWED_HOSTS = ['*'] # tighten this before deploying for real
 
 
 INSTALLED_APPS = [

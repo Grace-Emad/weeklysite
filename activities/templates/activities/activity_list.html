@@ -27,6 +27,7 @@
                             <button type="submit">In</button>
                         </form>
                     {% endif %}
+                    <a href="{% url 'activity_details' activity.id %}"><button>Details</button></a>
                 {% else %}
                     <a href="{% url 'login' %}"><button type="button">Log in to enroll</button></a>
                 {% endif %}

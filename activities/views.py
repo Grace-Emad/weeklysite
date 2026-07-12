@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.utils.http import url_has_allowed_host_and_scheme
 
 from .models import Activity, Enrollment, Profile
 from .forms import ActivityForm, AccountCreateForm, AccountEditForm
@@ -11,6 +12,12 @@ def staff_required(view_func):
     """Only lets staff/admin accounts in - everyone else gets sent to login."""
     return user_passes_test(lambda u: u.is_authenticated and u.is_staff, login_url='login')(view_func)
 
+def _redirect_back(request, default='activity_list'):
+    """Send the user back to wherever a 'next' field says, falling back to the activity list."""
+    next_url = request.POST.get('next')
+    if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+        return redirect(next_url)
+    return redirect(default)
 
 # ---------- User-facing views ----------
 
@@ -79,6 +86,17 @@ def my_score(request):
         'my_enrollments': my_enrollments,
     })
 
+@login_required
+def activity_details(request, activity_id):
+    activity = get_object_or_404(Activity, id=activity_id)
+    enrolled_users = User.objects.filter(enrollments__activity=activity)
+    is_enrolled = request.user.is_authenticated and enrolled_users.filter(id=request.user.id).exists()
+
+    return render(request, 'activities/activity_details.html', {
+        'activity': activity,
+        'enrolled_users' : enrolled_users,
+        'is_enrolled': is_enrolled,
+    })
 
 # ---------- Admin views (staff only) ----------
 

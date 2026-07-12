@@ -1,0 +1,52 @@
+{% extends 'activities/index.html' %}
+
+{% block title %}{{ activity.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="main-heading">{{ activity.name }}</h1>
+
+    <div class="act-contents detail-card">
+        {% if activity.description %}
+            <p>{{ activity.description }}</p>
+        {% endif %}
+
+        <p>{{ activity.week_date }}</p>
+        <p>{% if activity.start_time %} starts at {{ activity.start_time|time:"g:i A" }}{% endif %}</p>
+        <p>{% if activity.end_time %} ends at {{ activity.end_time|time:"g:i A" }}{% endif %}</p>
+        <p>score: {{ activity.points }}</p>
+        <p class="spots">{{ activity.spots_taken }} / {{ activity.max_participants }} spots filled</p>
+
+        {% if user.is_authenticated %}
+            {% if is_enrolled %}
+                <form action="{% url 'unenroll' activity.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'activity_details' activity.id %}">
+                    <button type="submit">Leave</button>
+                </form>
+            {% elif activity.is_full %}
+                <button disabled>Full</button>
+            {% else %}
+                <form action="{% url 'enroll' activity.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'activity_details' activity.id %}">
+                    <button type="submit">In</button>
+                </form>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}"><button type="button">Log in to enroll</button></a>
+        {% endif %}
+    </div>
+
+    <h3>Who's enrolled</h3>
+    {% if enrolled_users %}
+        <ul class="enrolled-list">
+            {% for enrolled_user in enrolled_users %}
+                <li>{{ enrolled_user.username }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No one has enrolled yet.</p>
+    {% endif %}
+
+    <p><a href="{% url 'activity_list' %}">&larr; Back to all activities</a></p>
+{% endblock %}
