@@ -86,6 +86,9 @@ def my_score(request):
         'my_enrollments': my_enrollments,
     })
 
+def calendar(request):
+    return render(request, 'activities/calendar.html');
+
 @login_required
 def activity_details(request, activity_id):
     activity = get_object_or_404(Activity, id=activity_id)

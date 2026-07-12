@@ -2,9 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'activities/style.css' %}">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Youth Summer{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'activities/style.css' %}">
+    <link rel="stylesheet" href="{% static 'activities/queries.css' %}">
+
+
 </head>
 <body>
     <header>
@@ -14,6 +18,7 @@
                 <a href="{% url 'my_score' %}">My Score</a>
                 {% if user.is_staff %}
                     <a href="{% url 'admin_dashboard' %}">Admin panel</a>
+                    <a href="{% url 'calendar' %}">Calendar</a>
                 {% endif %}
                 <span class="nav-user">Hi, {{ user.username }}</span>
                 <form action="{% url 'logout' %}" method="post" class="inline-form">

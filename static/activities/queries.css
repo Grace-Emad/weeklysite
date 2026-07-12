@@ -1,0 +1,21 @@
+@media(max-width: 72rem){
+
+}
+
+@media(max-width: 51rem){
+        nav {
+            flex-direction: column;
+            gap: 2rem;
+        }
+}
+
+@media(max-width: 43rem){
+    .act-grid{
+        grid-auto-flow: row;
+    }
+
+}
+
+@media(max-width: 34rem){
+
+}

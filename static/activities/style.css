@@ -232,3 +232,10 @@ header nav a:hover, header nav .link-button:hover {
 .messages li.success { background: #dcf3df; }
 .messages li.error { background: #fbdada; }
 .messages li.info { background: #dbeaf7; }
+
+
+/*calendar*/
+.cal {
+    padding-bottom: 10rem;
+    margin-bottom: 20rem;
+}
