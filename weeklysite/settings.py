@@ -14,8 +14,8 @@ SECRET_KEY = 'wiRAhXNTWI9SVG4MO8cc9wnIcHysckIUhAfGUJZyLJtvLt0Ui1tiTBKI8hL7ZyBR-B
 
 # SECURITY WARNING: don't run with DEBUG = True in production.
 DEBUG = True
-ALLOWED_HOSTS = ['*'] # tighten this before deploying for real
-# grace242.pythonanywhere.com
+ALLOWED_HOSTS = ['grace242.pythonanywhere.com'] # tighten this before deploying for real
+
 
 INSTALLED_APPS = [
     'django.contrib.auth',
