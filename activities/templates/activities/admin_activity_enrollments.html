@@ -1,0 +1,41 @@
+{% extends 'activities/../../../activities/templates/activities/index.html' %}
+
+{% block title %}Enrollments - {{ activity.name }}{% endblock %}
+{% block content %}
+    <h1 class="main-heading">Enrollments for {{ activity.name }}</h1>
+    <p>{{ activity.week_date }}</p>
+    <p>max score: {{ activity.points }}</p>
+
+    <br>
+
+    {% if enrollments %}
+        <ul class="enrolled-list">
+            {% for enrollment in enrollments %}
+                <li>
+                    {{ enrollment.user.username }}
+                    <br>
+                    <form action="{% url 'admin_apply_score' activity.id enrollment.user.id %}" method="post" class="inline-form">
+                        {% csrf_token %}
+                        <input type="number" id="score" name="score" placeholder="150" value="{{ enrollment.final_score }}">
+                        <button type="submit">Apply Score</button>
+                    </form>
+                    <form action="{% url 'admin_activity_remove_enrollment' activity.id enrollment.user.id %}" method="post" class="inline-form">
+                        {% csrf_token %}
+                        <br>
+                        <button type="submit" class="danger-link-button">Remove</button>
+                    </form>
+                <br>
+                </li>
+            {% endfor %}
+        </ul>
+        <form action="{% url 'admin_activity_clear_enrollments' activity.id %}" method="post"
+              onsubmit="return confirm('Remove everyone enrolled in {{ activity.name }}? This can\'t be undone.');">
+            {% csrf_token %}
+            <button type="submit" class="btn danger-btn">Clear all enrollments</button>
+        </form>
+    {% else %}
+        <p>No one is enrolled in this activity yet.</p>
+    {% endif %}
+
+    <p><a href="{% url 'admin_dashboard' %}">&larr; Back to admin panel</a></p>
+{% endblock %}

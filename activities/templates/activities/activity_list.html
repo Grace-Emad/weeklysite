@@ -10,7 +10,7 @@
         {% for activity in activities %}
             <div class="act-contents {% if activity.is_full %}full{% endif %}">
                 <p>{{ activity.name }}</p>
-                <p>score: {{ activity.points }}</p>
+                <p>max score: {{ activity.points }}</p>
                 <p class="spots">{{ activity.spots_taken }} / {{ activity.max_participants }} spots filled</p>
 
                 {% if user.is_authenticated %}

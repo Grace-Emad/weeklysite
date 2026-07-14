@@ -19,6 +19,7 @@
                 <th>Points</th>
                 <th>Spots</th>
                 <th></th>
+                <th>Status</th>
             </tr>
             {% for activity in activities %}
                 <tr>
@@ -28,7 +29,17 @@
                     <td>{{ activity.spots_taken }} / {{ activity.max_participants }}</td>
                     <td class="admin-row-actions">
                         <a href="{% url 'admin_activity_edit' activity.id %}">Edit</a>
+                        <a href="{% url 'admin_activity_enrollments' activity.id %}">Enrollments</a>
+                        <form action="{% url 'admin_activity_toggle_hidden' activity.id %}" method="post" class="inline-form">
+                            {% csrf_token %}
+                            <button type="submit" class="link-button-dark">
+                                {% if activity.is_hidden %}Show{% else %}Hide{% endif %}
+                            </button>
+                        </form>
                         <a href="{% url 'admin_activity_delete' activity.id %}" class="danger-link">Delete</a>
+                    </td>
+                    <td>
+                        <button id="status_btn"  onclick="status()">Not Marked</button>
                     </td>
                 </tr>
             {% endfor %}
@@ -36,4 +47,18 @@
     {% else %}
         <p>No activities yet.</p>
     {% endif %}
+
+    <script>
+    status_btn = document.getElementById("status_btn")
+    function status(){
+        if(status_btn.textContent === "Not Marked") {
+            status_btn.style.backgroundColor = "1AC30AFF"
+            status_btn.innerText = "Marked"
+        }
+        else {
+            status_btn.style.backgroundColor = "#d61212;"
+            status_btn.innerText = "Not Marked"
+        }
+    }
+    </script>
 {% endblock %}

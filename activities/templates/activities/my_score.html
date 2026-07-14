@@ -12,7 +12,7 @@
             <div class="act-contents">
                 <p>{{ enrollment.activity.name }}</p>
                 <p>{{ enrollment.activity.week_date }}</p>
-                <p>score: {{ enrollment.activity.points }}</p>
+                <p>my score: {{ enrollment.final_score }} / {{ enrollment.activity.points }}</p>
             </div>
         {% empty %}
             <p>You haven't enrolled in any activities yet.</p>

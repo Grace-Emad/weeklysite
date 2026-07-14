@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'wiRAhXNTWI9SVG4MO8cc9wnIcHysckIUhAfGUJZyLJtvLt0Ui1tiTBKI8hL7ZyBR-Bs'
 
 # SECURITY WARNING: don't run with DEBUG = True in production.
-DEBUG = False
-ALLOWED_HOSTS = ['grace242.pythonanywhere.com'] # tighten this before deploying for real
-
+DEBUG = True
+ALLOWED_HOSTS = ['*'] # tighten this before deploying for real
+# grace242.pythonanywhere.com
 
 INSTALLED_APPS = [
     'django.contrib.auth',

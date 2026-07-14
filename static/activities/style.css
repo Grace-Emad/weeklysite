@@ -239,3 +239,58 @@ header nav a:hover, header nav .link-button:hover {
     padding-bottom: 10rem;
     margin-bottom: 20rem;
 }
+
+.detail-card {
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+.enrolled-list {
+    max-width: 300px;
+    margin: 0 auto 2rem;
+    text-align: left;
+}
+
+.enrolled-list li {
+    padding: 4px 0;
+    border-bottom: 1px solid #ffffff;
+}
+
+
+
+/* ---- added: hide toggle, enrollment management ---- */
+
+.inline-form {
+    display: inline-block;
+    margin: 0;
+}
+
+.link-button-dark {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #222;
+    text-decoration: underline;
+    padding: 0;
+    margin-right: 12px;
+}
+
+.danger-link-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #b23b3b;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.enrolled-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+

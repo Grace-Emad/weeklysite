@@ -24,11 +24,12 @@ def create_or_update_profile(sender, instance, created, **kwargs):
 class Activity(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    week_date = models.DateField(help_text="Which week/date this activity is for")
-    start_time = models.TimeField(blank=True, null=True, help_text="What time this activity starts")
-    end_time = models.TimeField(blank=True, null=True, help_text="What time this activity ends")
+    week_date = models.DateField()
+    start_time = models.TimeField(blank=True, null=True)
+    end_time = models.TimeField(blank=True, null=True)
     max_participants = models.PositiveIntegerField(default=4)
-    points = models.PositiveIntegerField(default=0, help_text="Points a user earns for enrolling in this activity")
+    points = models.PositiveIntegerField(default=0)
+    is_hidden = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -54,6 +55,7 @@ class Enrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments')
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE, related_name='enrollments')
     enrolled_at = models.DateTimeField(auto_now_add=True)
+    final_score = models.PositiveIntegerField(default=0)
 
     class Meta:
         unique_together = ('user', 'activity')  # can't enroll twice in the same activity

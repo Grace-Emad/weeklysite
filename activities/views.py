@@ -19,6 +19,13 @@ def _redirect_back(request, default='activity_list'):
         return redirect(next_url)
     return redirect(default)
 
+def _remove_enrollment(user, activity):
+    deleted, _ = Enrollment.objects.filter(user=user, activity=activity).delete()
+    if deleted:
+        profile = user.profile
+        profile.save()
+    return bool(deleted)
+
 # ---------- User-facing views ----------
 
 def activity_list(request):
@@ -26,7 +33,7 @@ def activity_list(request):
     Shows every activity, how many spots are taken/left. Anyone can view
     this page - only enrolling/leaving/viewing score requires login.
     """
-    activities = Activity.objects.all()
+    activities = Activity.objects.filter(is_hidden=False)
     my_enrolled_ids = set()
     if request.user.is_authenticated:
         my_enrolled_ids = set(
@@ -52,9 +59,8 @@ def enroll(request, activity_id):
         else:
             Enrollment.objects.create(user=request.user, activity=activity)
             profile = request.user.profile
-            profile.score += activity.points
             profile.save()
-            messages.success(request, f"You're enrolled in {activity.name}! +{activity.points} points")
+            messages.success(request, f"You're enrolled in {activity.name}!")
 
     return redirect('activity_list')
 
@@ -66,10 +72,6 @@ def unenroll(request, activity_id):
 
     if request.method == 'POST':
         deleted, _ = Enrollment.objects.filter(user=request.user, activity=activity).delete()
-        if deleted:
-            profile = request.user.profile
-            profile.score = max(profile.score - activity.points, 0)
-            profile.save()
         messages.info(request, f"You've left {activity.name}.")
 
     return redirect('activity_list')
@@ -86,8 +88,7 @@ def my_score(request):
         'my_enrollments': my_enrollments,
     })
 
-def calendar(request):
-    return render(request, 'activities/calendar.html');
+
 
 @login_required
 def activity_details(request, activity_id):
@@ -109,7 +110,8 @@ def admin_dashboard(request):
     activities = Activity.objects.all()
     return render(request, 'activities/admin_dashboard.html', {'activities': activities})
 
-
+def calendar(request):
+    return render(request, 'activities/calendar.html')
 @staff_required
 def admin_activity_create(request):
     if request.method == 'POST':
@@ -143,6 +145,13 @@ def admin_activity_edit(request, activity_id):
         'form': form, 'title': f'Edit {activity.name}',
     })
 
+@staff_required
+def admin_activity_toggle_hidden(request, activity_id):
+    activity = get_object_or_404(Activity, id=activity_id)
+    if request.method == 'POST':
+        activity.is_hidden = not activity.is_hidden
+        activity.save()
+    return redirect('admin_dashboard')
 
 @staff_required
 def admin_activity_delete(request, activity_id):
@@ -240,3 +249,66 @@ def admin_account_delete(request, user_id):
         'object_label': account.username,
         'cancel_url': 'admin_account_list',
     })
+
+@staff_required
+def admin_activity_enrollments(request, activity_id):
+    activity = get_object_or_404(Activity, id=activity_id)
+    enrollments = Enrollment.objects.filter(activity=activity).select_related('user')
+
+
+    return render(request, 'activities/admin_activity_enrollments.html', {
+        'activity': activity,
+        'enrollments': enrollments,
+    })
+
+
+@staff_required
+def admin_activity_remove_enrollment(request, activity_id, user_id):
+    activity = get_object_or_404(Activity, id=activity_id)
+    account = get_object_or_404(User, id=user_id)
+
+    if request.method == 'POST':
+        if _remove_enrollment(account, activity):
+            messages.info(request, f"Removed {account.username} from {activity.name}.")
+
+    return redirect('admin_activity_enrollments', activity_id=activity.id)
+
+def admin_activity_clear_enrollments(request, activity_id):
+    """Removes everyone enrolled in an activity at once - e.g. to reuse it next week."""
+    activity = get_object_or_404(Activity, id=activity_id)
+
+    if request.method == 'POST':
+        enrolled_users = list(User.objects.filter(enrollments__activity=activity))
+        for account in enrolled_users:
+            _remove_enrollment(account, activity)
+        messages.info(request, f"Cleared all enrollments for {activity.name}.")
+
+    return redirect('admin_activity_enrollments', activity_id=activity.id)
+
+@staff_required
+def admin_apply_score(request, activity_id, user_id):
+    activity = get_object_or_404(Activity, id=activity_id)
+    account = get_object_or_404(User, id=user_id)
+    enrollment = get_object_or_404(Enrollment, activity=activity, user=account)
+
+    if request.method == 'POST':
+        raw_score = request.POST.get('score')
+
+        if raw_score:
+            profile, _ = Profile.objects.get_or_create(user=account)
+            if(enrollment.final_score == 0):
+                profile.score += int(raw_score)
+            else:
+                profile.score -= enrollment.final_score
+                profile.score += int(raw_score)
+
+            profile.save()
+            enrollment.final_score = int(raw_score)
+            enrollment.save()
+            messages.info(request, "Score applied.")
+        else:
+            messages.info(request, f"Invalid score.")
+
+    return redirect('admin_activity_enrollments', activity_id=activity.id)
+
+
