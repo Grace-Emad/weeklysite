@@ -25,6 +25,7 @@ urlpatterns = [
          views.admin_activity_remove_enrollment, name='admin_activity_remove_enrollment'),
     path('admin-panel/activities/<int:activity_id>/enrollments/<int:user_id>/apply-score/',
          views.admin_apply_score, name='admin_apply_score'),
+    path('admin-panel/activities/<int:activity_id>/marked-toggle/', views.admin_activity_marked_toggle, name='admin_activity_marked_toggle'),
     path('admin-panel/accounts/', views.admin_account_list, name='admin_account_list'),
     path('admin-panel/accounts/new/', views.admin_account_create, name='admin_account_create'),
     path('admin-panel/accounts/<int:user_id>/', views.admin_account_detail, name='admin_account_detail'),

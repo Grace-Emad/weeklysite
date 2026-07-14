@@ -12,53 +12,57 @@
 
     <h3>Activities</h3>
     {% if activities %}
-        <table class="admin-table">
-            <tr>
-                <th>Name</th>
-                <th>Week</th>
-                <th>Points</th>
-                <th>Spots</th>
-                <th></th>
-                <th>Status</th>
-            </tr>
-            {% for activity in activities %}
+        <div class="table-container">
+            <table class="admin-table">
                 <tr>
-                    <td>{{ activity.name }}</td>
-                    <td>{{ activity.week_date }}</td>
-                    <td>{{ activity.points }}</td>
-                    <td>{{ activity.spots_taken }} / {{ activity.max_participants }}</td>
-                    <td class="admin-row-actions">
-                        <a href="{% url 'admin_activity_edit' activity.id %}">Edit</a>
-                        <a href="{% url 'admin_activity_enrollments' activity.id %}">Enrollments</a>
-                        <form action="{% url 'admin_activity_toggle_hidden' activity.id %}" method="post" class="inline-form">
-                            {% csrf_token %}
-                            <button type="submit" class="link-button-dark">
-                                {% if activity.is_hidden %}Show{% else %}Hide{% endif %}
-                            </button>
-                        </form>
-                        <a href="{% url 'admin_activity_delete' activity.id %}" class="danger-link">Delete</a>
-                    </td>
-                    <td>
-                        <button id="status_btn"  onclick="status()">Not Marked</button>
-                    </td>
+                    <th>Name</th>
+                    <th>Week</th>
+                    <th>Points</th>
+                    <th>Spots</th>
+                    <th>Buttons</th>
+                    <th>Visibility</th>
+                    <th>Status</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for activity in activities %}
+                    <tr>
+                        <td>{{ activity.name }}</td>
+                        <td>{{ activity.week_date }}</td>
+                        <td>{{ activity.points }}</td>
+                        <td>{{ activity.spots_taken }} / {{ activity.max_participants }}</td>
+                        <td class="admin-table-rows">
+                            <div class="table-btns">
+                                <a class="btn admin-btn" href="{% url 'admin_activity_edit' activity.id %}">Edit</a>
+                                <a class="btn admin-btn" href="{% url 'admin_activity_enrollments' activity.id %}">Enrollments</a>
+                            </div>
+
+                        </td>
+                        <td>
+                            <form action="{% url 'admin_activity_toggle_hidden' activity.id %}" method="post" class="inline-form">
+                                {% csrf_token %}
+                                <button type="submit" class="toggle-btn {% if activity.is_hidden %}toggle-btn-green{% else %}toggle-btn-red{% endif %}">
+                                    {% if activity.is_hidden %}Show{% else %}Hide{% endif %}
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'admin_activity_marked_toggle' activity.id %}" method="post" class="inline-form">
+                                {% csrf_token %}
+                                <button type="submit" class="toggle-btn {% if activity.is_marked %}toggle-btn-green{% else %}toggle-btn-red{% endif %}">
+                                    {% if activity.is_marked %}Marked{% else %}Unmarked{% endif %}
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="{% url 'admin_activity_delete' activity.id %}" class="btn admin-btn danger-btn">Delete</a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
     {% else %}
         <p>No activities yet.</p>
     {% endif %}
 
-    <script>
-    status_btn = document.getElementById("status_btn")
-    function status(){
-        if(status_btn.textContent === "Not Marked") {
-            status_btn.style.backgroundColor = "1AC30AFF"
-            status_btn.innerText = "Marked"
-        }
-        else {
-            status_btn.style.backgroundColor = "#d61212;"
-            status_btn.innerText = "Not Marked"
-        }
-    }
-    </script>
 {% endblock %}

@@ -5,7 +5,7 @@
 @media(max-width: 51rem){
         nav {
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 }
 
@@ -13,7 +13,9 @@
     .act-grid{
         grid-auto-flow: row;
     }
-
+    .table-container{
+        padding-left: 18rem;
+    }
 }
 
 @media(max-width: 34rem){

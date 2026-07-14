@@ -17,19 +17,19 @@
                     {% if activity.id in my_enrolled_ids %}
                         <form action="{% url 'unenroll' activity.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit">Leave</button>
+                            <button class="btn" type="submit">Leave</button>
                         </form>
                     {% elif activity.is_full %}
-                        <button disabled>Full</button>
+                        <button class="btn" disabled>Full</button>
                     {% else %}
                         <form action="{% url 'enroll' activity.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit">In</button>
+                            <button class="btn" type="submit">In</button>
                         </form>
                     {% endif %}
-                    <a href="{% url 'activity_details' activity.id %}"><button>Details</button></a>
+                    <a href="{% url 'activity_details' activity.id %}"><button class="btn">Details</button></a>
                 {% else %}
-                    <a href="{% url 'login' %}"><button type="button">Log in to enroll</button></a>
+                    <a href="{% url 'login' %}"><button class="btn" type="button">Log in to enroll</button></a>
                 {% endif %}
             </div>
         {% empty %}

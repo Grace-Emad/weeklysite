@@ -7,24 +7,29 @@
     <title>{% block title %}Youth Summer{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'activities/style.css' %}">
     <link rel="stylesheet" href="{% static 'activities/queries.css' %}">
-
+    <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
 
 </head>
 <body>
     <header>
         <nav>
-            <a href="{% url 'activity_list' %}">Activities</a>
-            {% if user.is_authenticated %}
+            <div class="nav-left-container">
+                <a href="{% url 'activity_list' %}">Activities</a>
+                {% if user.is_authenticated %}
                 <a href="{% url 'my_score' %}">My Score</a>
                 {% if user.is_staff %}
                     <a href="{% url 'admin_dashboard' %}">Admin panel</a>
                     <a href="{% url 'calendar' %}">Calendar</a>
                 {% endif %}
-                <span class="nav-user">Hi, {{ user.username }}</span>
+            </div>
+            <div class="nav-user-container">
+                <p class="nav-user">Hi, {{ user.username }}</p>
                 <form action="{% url 'logout' %}" method="post" class="inline-form">
                     {% csrf_token %}
                     <button type="submit" class="link-button">Log out</button>
                 </form>
+            </div>
+
             {% else %}
                 <a href="{% url 'login' %}">Log in</a>
             {% endif %}

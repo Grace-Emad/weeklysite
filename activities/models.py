@@ -30,6 +30,7 @@ class Activity(models.Model):
     max_participants = models.PositiveIntegerField(default=4)
     points = models.PositiveIntegerField(default=0)
     is_hidden = models.BooleanField(default=False)
+    is_marked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -312,3 +312,11 @@ def admin_apply_score(request, activity_id, user_id):
     return redirect('admin_activity_enrollments', activity_id=activity.id)
 
 
+@staff_required
+def admin_activity_marked_toggle(request, activity_id):
+    activity = get_object_or_404(Activity, id=activity_id)
+
+    if request.method =='POST':
+        activity.is_marked = not activity.is_marked
+        activity.save()
+    return redirect('admin_dashboard')

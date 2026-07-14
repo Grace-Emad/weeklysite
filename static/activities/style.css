@@ -10,7 +10,6 @@ body {
 
 a {
     text-decoration:none;
-    color: #fff;
 }
 
 ul {
@@ -28,6 +27,20 @@ h1 {
 p {
     margin: 0 auto;
     line-height: 1.6;
+}
+
+table {
+    width: 100%;
+    max-width: 1000px;
+    display: table;
+    border-collapse: collapse;
+    text-indent: 0;
+}
+
+th, td {
+    border: none;
+    background: transparent;
+    padding: 1rem;
 }
 
 .main-cont {
@@ -59,27 +72,32 @@ p {
 
 /* ---- added: nav, forms, buttons, admin pages, messages ---- */
 
-header {
+nav {
+    width: 100%;
     background: #222;
-    padding: 12px 24px;
-}
-
-header nav {
+    padding: 20px 24px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 18px;
 }
 
-header nav a, header nav .link-button {
+nav a, .link-button {
     color: #eee;
     font-size: 14px;
 }
 
-header nav a:hover, header nav .link-button:hover {
-    color: #fff;
-    text-decoration: underline;
+.nav-left-container {
+    display: flex;
+    gap: 1rem;
+    margin-left: 1rem;
 }
 
+.nav-user-container {
+    display: flex;
+    gap: 1rem;
+    margin-right: 1rem;
+}
 .nav-user {
     color: #aaa;
     font-size: 14px;
@@ -95,22 +113,26 @@ header nav a:hover, header nav .link-button:hover {
 }
 
 .btn {
+    color: #fff;
     display: inline-block;
     background: #222;
-    color: #fff;
     border: none;
     padding: 8px 18px;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
+
 }
 
 .btn:hover {
     background: #444;
 }
 
+
 .danger-btn {
-    background: #b23b3b;
+    background: #fff;
+    color: #b23b3b;
+    border: 2px solid #b23b3b;
 }
 
 .danger-btn:hover {
@@ -121,9 +143,41 @@ header nav a:hover, header nav .link-button:hover {
     color: #b23b3b;
 }
 
+.admin-btn {
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.toggle-btn {
+    border: none;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+.toggle-btn-red {
+    background: #b23b3b;
+}
+
+.toggle-btn-red:hover {
+    background: #8f2e2e;
+}
+
+.toggle-btn-green {
+    background: #2f8f4e;
+}
+
+.toggle-btn-green:hover {
+    background: #26723e;
+}
+
 .act-contents button {
     background: #222;
-    color: #fff;
     border: none;
     padding: 8px 18px;
     border-radius: 5px;
@@ -147,63 +201,6 @@ header nav a:hover, header nav .link-button:hover {
     align-items: center;
     justify-content: center;
     margin-bottom: 2rem;
-}
-
-.admin-table {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-.admin-table th, .admin-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-.admin-row-actions a {
-    margin-right: 12px;
-    color: #222;
-}
-
-.admin-form {
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.admin-form p {
-    margin-bottom: 1rem;
-}
-
-.admin-form label {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 14px;
-}
-
-.admin-form input[type="text"],
-.admin-form input[type="password"],
-.admin-form input[type="date"],
-.admin-form input[type="number"],
-.admin-form textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.admin-checklist {
-    text-align: left;
-    max-width: 400px;
-    margin: 0 auto 1.5rem;
-}
-
-.admin-checklist li {
-    margin-bottom: 8px;
-    font-size: 14px;
 }
 
 .spots {
@@ -265,16 +262,6 @@ header nav a:hover, header nav .link-button:hover {
     margin: 0;
 }
 
-.link-button-dark {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    color: #222;
-    text-decoration: underline;
-    padding: 0;
-    margin-right: 12px;
-}
 
 .danger-link-button {
     background: none;
@@ -286,11 +273,28 @@ header nav a:hover, header nav .link-button:hover {
     padding: 0;
 }
 
-.enrolled-list li {
+.enrolled-list {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
+/* admin table */
 
+.table-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
 
+.table-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    flex-flow: wrap;
+    margin: 0 auto;
+}
