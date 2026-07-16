@@ -9,9 +9,12 @@ urlpatterns = [
     path('my-score/', views.my_score, name='my_score'),
 
     path('activity/<int:activity_id>/', views.activity_details, name='activity_details'),
-    path('calendar/', views.calendar, name='calendar'),
+    path('guidelines', views.guidelines, name='guidelines'),
+    path('content', views.content, name='content'),
+
 
     # our own admin panel (staff only)
+    path('calendar/', views.calendar, name='calendar'),
     path('admin-panel/', views.admin_dashboard, name='admin_dashboard'),
     path('admin-panel/activities/new/', views.admin_activity_create, name='admin_activity_create'),
     path('admin-panel/activities/<int:activity_id>/edit/', views.admin_activity_edit, name='admin_activity_edit'),

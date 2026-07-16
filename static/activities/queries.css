@@ -3,21 +3,27 @@
 }
 
 @media(max-width: 51rem){
-        nav {
-            flex-direction: column;
-            gap: 1.5rem;
-        }
+    nav {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
 }
 
 @media(max-width: 43rem){
+
     .act-grid{
         grid-auto-flow: row;
     }
     .table-container{
         padding-left: 18rem;
     }
+    .arabic-text {
+        font-size: 20px;
+    }
 }
 
 @media(max-width: 34rem){
-
+    html {
+        font-size: 90%;
+    }
 }

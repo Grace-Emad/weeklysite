@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1 class="main-heading">Choose Your Activity</h1>
-    <h3>Available This Week</h3>
+    <h3 class="sec-color-text available-heading-text">Available This Week</h3>
 
     <div class="act-grid">
         {% for activity in activities %}
@@ -27,7 +27,7 @@
                             <button class="btn" type="submit">In</button>
                         </form>
                     {% endif %}
-                    <a href="{% url 'activity_details' activity.id %}"><button class="btn">Details</button></a>
+                    <a href="{% url 'activity_details' activity.id %}"><button class="sec-color-btn btn ">Details</button></a>
                 {% else %}
                     <a href="{% url 'login' %}"><button class="btn" type="button">Log in to enroll</button></a>
                 {% endif %}

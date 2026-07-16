@@ -3,11 +3,10 @@
 {% block title %}My Score{% endblock %}
 
 {% block content %}
-    <h1 class="main-heading">My Score</h1>
+    <h1 class="main-heading score-heading">My Score</h1>
     <p class="score">{{ profile.score }}</p>
-
-    <h3>My Enrollments</h3>
-    <div class="act-grid">
+    <h3 class="sec-color-text enrollments-score-text">My Enrollments</h3>
+    <div class="act-grid act-grid-score">
         {% for enrollment in my_enrollments %}
             <div class="act-contents">
                 <p>{{ enrollment.activity.name }}</p>

@@ -1,9 +1,26 @@
+
+/*
+#e29578
+*/
+
 * {
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #006d77;
+    --secondary-color: #264653;
+    --tertiary-color: #42999b;
+    --score-color: #d46235;
+    --red-color: #b23b3b;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Rubik", sans-serif;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2)), url(/static/images/sherries-background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
 }
@@ -43,7 +60,12 @@ th, td {
     padding: 1rem;
 }
 
+.arabic-text {
+    font-size: 24px;
+}
+
 .main-cont {
+    height: 100vh;
     text-align: center;
     margin-top: 100px;
     box-sizing: border-box;
@@ -52,10 +74,14 @@ th, td {
 .main-heading {
     font-weight: 700;
     margin-bottom: 2em;
+    color: var(--secondary-color);
+}
+
+.sec-color-text {
+    color: var(--secondary-color);
 }
 
 .act-grid {
-    margin-top: 5rem;
     display: grid;
     justify-content: center;
     align-content: center;
@@ -64,17 +90,24 @@ th, td {
 }
 
 .act-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
     min-width: 200px;
     padding: 2rem;
     border-radius: 5px;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
 }
 
-/* ---- added: nav, forms, buttons, admin pages, messages ---- */
+.available-heading-text {
+    margin-bottom: 3rem;
+}
+
+/* Nav */
 
 nav {
     width: 100%;
-    background: #222;
+    background: var(--primary-color);
     padding: 20px 24px;
     display: flex;
     justify-content: space-between;
@@ -90,7 +123,8 @@ nav a, .link-button {
 .nav-left-container {
     display: flex;
     gap: 1rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
+    align-items: center;
 }
 
 .nav-user-container {
@@ -104,6 +138,8 @@ nav a, .link-button {
     margin-left: auto;
 }
 
+/* Buttons */
+
 .link-button {
     background: none;
     border: none;
@@ -115,7 +151,7 @@ nav a, .link-button {
 .btn {
     color: #fff;
     display: inline-block;
-    background: #222;
+    background: var(--primary-color);
     border: none;
     padding: 8px 18px;
     border-radius: 5px;
@@ -125,9 +161,12 @@ nav a, .link-button {
 }
 
 .btn:hover {
-    background: #444;
+    background: var(--secondary-color);
 }
 
+.sec-color-btn {
+    background: #42999b;
+}
 
 .danger-btn {
     background: #fff;
@@ -176,25 +215,6 @@ nav a, .link-button {
     background: #26723e;
 }
 
-.act-contents button {
-    background: #222;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    margin-top: 1rem;
-}
-
-.act-contents button:hover {
-    background: #444;
-}
-
-.act-contents button:disabled {
-    background: #999;
-    cursor: not-allowed;
-}
-
 .admin-links {
     display: flex;
     gap: 16px;
@@ -203,15 +223,7 @@ nav a, .link-button {
     margin-bottom: 2rem;
 }
 
-.spots {
-    font-size: 0.9rem;
-    color: #555;
-}
-
-.score {
-    font-size: 3rem;
-    font-weight: bold;
-}
+/* Messages */
 
 .messages {
     max-width: 500px;
@@ -229,6 +241,54 @@ nav a, .link-button {
 .messages li.success { background: #dcf3df; }
 .messages li.error { background: #fbdada; }
 .messages li.info { background: #dbeaf7; }
+
+/* score */
+
+.score-heading {
+    margin-bottom: 1.5rem;
+}
+
+.score {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--score-color);
+    margin-bottom: 3rem;
+}
+.enrollments-score-text {
+
+}
+
+.act-grid-score {
+    margin-top: 2rem;
+}
+
+
+/*content page*/
+
+.cont-container {
+    margin-top: 4rem;
+    display: flex;
+    gap: 7rem;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.score-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
 
 
 /*calendar*/
@@ -253,9 +313,6 @@ nav a, .link-button {
     border-bottom: 1px solid #ffffff;
 }
 
-
-
-/* ---- added: hide toggle, enrollment management ---- */
 
 .inline-form {
     display: inline-block;
@@ -297,4 +354,17 @@ nav a, .link-button {
     gap: 0.8rem;
     flex-flow: wrap;
     margin: 0 auto;
+}
+
+/* Admin Form */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.admin-form-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }

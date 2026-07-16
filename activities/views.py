@@ -45,6 +45,11 @@ def activity_list(request):
         'my_enrolled_ids': my_enrolled_ids,
     })
 
+def guidelines(request):
+    return render(request, 'activities/guidelines.html')
+
+def content(request):
+    return render(request, 'activities/content.html')
 
 @login_required
 def enroll(request, activity_id):

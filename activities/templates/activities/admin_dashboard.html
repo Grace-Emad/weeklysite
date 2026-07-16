@@ -39,8 +39,8 @@
                         <td>
                             <form action="{% url 'admin_activity_toggle_hidden' activity.id %}" method="post" class="inline-form">
                                 {% csrf_token %}
-                                <button type="submit" class="toggle-btn {% if activity.is_hidden %}toggle-btn-green{% else %}toggle-btn-red{% endif %}">
-                                    {% if activity.is_hidden %}Show{% else %}Hide{% endif %}
+                                <button type="submit" class="toggle-btn {% if activity.is_hidden %}toggle-btn-red{% else %}toggle-btn-green{% endif %}">
+                                    {% if activity.is_hidden %}Hidden{% else %}visible{% endif %}
                                 </button>
                             </form>
                         </td>

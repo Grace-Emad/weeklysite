@@ -5,22 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Youth Summer{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'activities/style.css' %}">
     <link rel="stylesheet" href="{% static 'activities/queries.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
-
 </head>
 <body>
     <header>
         <nav>
             <div class="nav-left-container">
                 <a href="{% url 'activity_list' %}">Activities</a>
-                {% if user.is_authenticated %}
+
+            {% if user.is_authenticated %}
                 <a href="{% url 'my_score' %}">My Score</a>
+
                 {% if user.is_staff %}
                     <a href="{% url 'admin_dashboard' %}">Admin panel</a>
                     <a href="{% url 'calendar' %}">Calendar</a>
                 {% endif %}
+                <a href="{% url 'content' %}">Content</a>
+                <a href="{% url 'guidelines' %}">Guidelines</a>
             </div>
             <div class="nav-user-container">
                 <p class="nav-user">Hi, {{ user.username }}</p>

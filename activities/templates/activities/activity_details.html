@@ -1,4 +1,4 @@
-{% extends 'activities/index.html' %}
+{% extends 'activities/../../../activities/templates/activities/index.html' %}
 
 {% block title %}{{ activity.name }}{% endblock %}
 
@@ -11,8 +11,8 @@
         {% endif %}
 
         <p>{{ activity.week_date }}</p>
-        <p>{% if activity.start_time %} starts at {{ activity.start_time|time:"g:i A" }}{% endif %}</p>
-        <p>{% if activity.end_time %} ends at {{ activity.end_time|time:"g:i A" }}{% endif %}</p>
+        <p>{% if activity.start_time %} from {{ activity.start_time|time:"g:i A" }}{% endif %}</p>
+        <p>{% if activity.end_time %} to {{ activity.end_time|time:"g:i A" }}{% endif %}</p>
         <p>max score: {{ activity.points }}</p>
         <p class="spots">{{ activity.spots_taken }} / {{ activity.max_participants }} spots filled</p>
 
@@ -37,7 +37,7 @@
         {% endif %}
     </div>
 
-    <h3>Who's enrolled</h3>
+    <h3 class="sec-color-text">Who's enrolled</h3>
     {% if enrolled_users %}
         <ul class="enrolled-list">
             {% for enrolled_user in enrolled_users %}
