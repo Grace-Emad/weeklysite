@@ -29,8 +29,6 @@
         font-size: 90%;
     }
     body {
-        background-size: 135% 100%;
-        background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3))
-        , url(/static/images/sherries-background.jpg);
+        background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0))
     }
 }
