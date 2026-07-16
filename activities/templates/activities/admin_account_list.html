@@ -7,29 +7,32 @@
 
     <div class="admin-links">
         <a href="{% url 'admin_account_create' %}" class="btn">+ New account</a>
-        <a href="{% url 'admin_dashboard' %}">Back to admin panel</a>
     </div>
 
     {% if accounts %}
-        <table class="admin-table">
-            <tr>
-                <th>Username</th>
-                <th>Score</th>
-                <th>Admin?</th>
-                <th></th>
-            </tr>
-            {% for account in accounts %}
+        <div class="accounts-table">
+            <table>
                 <tr>
-                    <td>{{ account.username }}</td>
-                    <td>{{ account.profile.score }}</td>
-                    <td>{% if account.is_staff %}Yes{% else %}No{% endif %}</td>
-                    <td class="admin-row-actions">
-                        <a href="{% url 'admin_account_detail' account.id %}">Manage</a>
-                        <a href="{% url 'admin_account_delete' account.id %}" class="danger-link">Delete</a>
-                    </td>
+                    <th>Username</th>
+                    <th>Score</th>
+                    <th>Admin?</th>
+                    <th>Buttons</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for account in accounts %}
+                    <tr>
+                        <td>{{ account.username }}</td>
+                        <td>{{ account.profile.score }}</td>
+                        <td>{% if account.is_staff %}Yes{% else %}No{% endif %}</td>
+                        <td class="table-btns">
+                            <a class="btn admin-btn" href="{% url 'admin_account_detail' account.id %}">Manage</a>
+                            <a class="btn admin-btn danger-btn" href="{% url 'admin_account_delete' account.id %}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
     {% else %}
         <p>No accounts yet.</p>
     {% endif %}

@@ -7,6 +7,7 @@
         flex-direction: column;
         gap: 1.5rem;
     }
+
 }
 
 @media(max-width: 43rem){
@@ -20,10 +21,16 @@
     .arabic-text {
         font-size: 20px;
     }
+
 }
 
 @media(max-width: 34rem){
     html {
         font-size: 90%;
+    }
+    body {
+        background-size: 135% 100%;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3))
+        , url(/static/images/sherries-background.jpg);
     }
 }

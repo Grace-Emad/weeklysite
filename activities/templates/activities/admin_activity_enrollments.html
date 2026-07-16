@@ -14,17 +14,17 @@
                 <li>
                     {{ enrollment.user.username }}
                     <br>
-                    <form action="{% url 'admin_apply_score' activity.id enrollment.user.id %}" method="post" class="inline-form">
-                        {% csrf_token %}
-                        <input type="number" id="score" name="score" placeholder="150" value="{{ enrollment.final_score }}">
-                        <button type="submit">Apply Score</button>
-                    </form>
-                    <form action="{% url 'admin_activity_remove_enrollment' activity.id enrollment.user.id %}" method="post" class="inline-form">
-                        {% csrf_token %}
-                        <br>
-                        <button type="submit" class="danger-link-button">Remove</button>
-                    </form>
-                <br>
+                    <div class="admin-act-enroll">
+                        <form action="{% url 'admin_apply_score' activity.id enrollment.user.id %}" method="post" class="inline-form">
+                            {% csrf_token %}
+                            <input type="number" id="score" name="score" placeholder="150" value="{{ enrollment.final_score }}">
+                            <button class="btn admin-btn" type="submit">Apply Score</button>
+                        </form>
+                        <form action="{% url 'admin_activity_remove_enrollment' activity.id enrollment.user.id %}" method="post" class="inline-form">
+                            {% csrf_token %}
+                            <button type="submit" class="btn admin-btn toggle-btn-red">Remove</button>
+                        </form>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
@@ -37,5 +37,4 @@
         <p>No one is enrolled in this activity yet.</p>
     {% endif %}
 
-    <p><a href="{% url 'admin_dashboard' %}">&larr; Back to admin panel</a></p>
 {% endblock %}

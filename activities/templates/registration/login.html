@@ -5,13 +5,13 @@
 {% block content %}
     <h1 class="main-heading">Log In</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Log In</button>
+    <form method="post" class="login-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn login-btn">Log In</button>
     </form>
 
     {% if form.errors %}
-        <p class="error">Your username and password didn't match. Please try again.</p>
+        <p class="error danger-link">Your username and password didn't match. Please try again.</p>
     {% endif %}
 {% endblock %}

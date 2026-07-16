@@ -13,7 +13,7 @@
     <h3>Activities</h3>
     {% if activities %}
         <div class="table-container">
-            <table class="admin-table">
+            <table>
                 <tr>
                     <th>Name</th>
                     <th>Week</th>
@@ -29,7 +29,7 @@
                         <td>{{ activity.week_date }}</td>
                         <td>{{ activity.points }}</td>
                         <td>{{ activity.spots_taken }} / {{ activity.max_participants }}</td>
-                        <td class="admin-table-rows">
+                        <td>
                             <div class="table-btns">
                                 <a class="btn admin-btn" href="{% url 'admin_activity_edit' activity.id %}">Edit</a>
                                 <a class="btn admin-btn" href="{% url 'admin_activity_enrollments' activity.id %}">Enrollments</a>

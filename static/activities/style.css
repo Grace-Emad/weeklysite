@@ -175,6 +175,7 @@ nav a, .link-button {
 }
 
 .danger-btn:hover {
+    color: #fff;
     background: #8f2e2e;
 }
 
@@ -262,8 +263,22 @@ nav a, .link-button {
     margin-top: 2rem;
 }
 
+/* Login */
 
-/*content page*/
+.login-form {
+    margin: 5rem 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.login-btn {
+    max-width: 100px;
+}
+
+/*Content Page*/
 
 .cont-container {
     margin-top: 4rem;
@@ -356,7 +371,13 @@ nav a, .link-button {
     margin: 0 auto;
 }
 
-/* Admin Form */
+.accounts-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Admin Activity Form */
 .admin-form {
     display: flex;
     flex-direction: column;
@@ -367,4 +388,10 @@ nav a, .link-button {
     display: flex;
     justify-content: center;
     gap: 1rem;
+}
+
+/* Admin Activity Enrollments*/
+
+.admin-act-enroll {
+    margin-bottom: 2.5rem;
 }
