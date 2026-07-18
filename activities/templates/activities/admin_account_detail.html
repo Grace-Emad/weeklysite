@@ -12,7 +12,11 @@
         <ul>
             {% for activity in all_activities %}
                 <li>
-                    {{ activity.name }} ({{ activity.week_date }})
+                    <label>
+                        <input type="checkbox" name="activities" value="{{ activity.id }}"
+                            {% if activity.id in enrolled_ids %}checked{% endif %}>
+                        {{ activity.name }} ({{ activity.week_date }})
+                    </label>
                 </li>
                 <br>
             {% empty %}

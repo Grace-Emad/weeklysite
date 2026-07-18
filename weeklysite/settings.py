@@ -5,16 +5,26 @@ Kept intentionally simple - one app (activities), sqlite database,
 no extra dependencies beyond Django itself.
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: change this before deploying anywhere public!
-SECRET_KEY = 'wiRAhXNTWI9SVG4MO8cc9wnIcHysckIUhAfGUJZyLJtvLt0Ui1tiTBKI8hL7ZyBR-Bs'
+load_dotenv(BASE_DIR / '.env')
 
-# SECURITY WARNING: don't run with DEBUG = True in production.
-DEBUG = False
-ALLOWED_HOSTS = ['grace242.pythonanywhere.com'] # tighten this before deploying for real
+# SECRET_KEY and DEBUG now live in .env, not in this file.
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    raise ValueError(
+        "SECRET_KEY is missing. Create a .env file in the project root "
+        "(next to manage.py) with a line like: SECRET_KEY=your-key-here"
+    )
+
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+# Comma-separated in .env, e.g. ALLOWED_HOSTS=yourname.pythonanywhere.com,127.0.0.1
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
 
 
 INSTALLED_APPS = [
