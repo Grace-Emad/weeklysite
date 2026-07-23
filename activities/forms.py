@@ -7,7 +7,7 @@ from .models import Activity
 class ActivityForm(forms.ModelForm):
     class Meta:
         model = Activity
-        fields = ['name', 'description', 'week_date', 'start_time', 'end_time', 'max_participants', 'points']
+        fields = ['name', 'type' , 'description', 'week_date', 'start_time', 'end_time', 'max_participants', 'points']
         widgets = {
             'week_date': forms.DateInput(attrs={'type': 'date'}),
             'start_time': forms.TimeInput(attrs={'type': 'time'}),

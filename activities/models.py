@@ -23,13 +23,14 @@ def create_or_update_profile(sender, instance, created, **kwargs):
 
 class Activity(models.Model):
     name = models.CharField(max_length=200)
+    type = models.CharField(max_length=50, default='Indoor')
     description = models.TextField(blank=True)
     week_date = models.DateField()
     start_time = models.TimeField(blank=True, null=True)
     end_time = models.TimeField(blank=True, null=True)
     max_participants = models.PositiveIntegerField(default=4)
     points = models.PositiveIntegerField(default=0)
-    is_hidden = models.BooleanField(default=False)
+    is_hidden = models.BooleanField(default=True)
     is_marked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 

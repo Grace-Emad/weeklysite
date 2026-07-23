@@ -9,6 +9,7 @@
     <div class="act-grid">
         {% for activity in activities %}
             <div class="act-contents {% if activity.is_full %}full{% endif %}">
+                <p class="act-type-text">{{ activity.type }}</p>
                 <p>{{ activity.name }}</p>
                 <p>max score: {{ activity.points }}</p>
                 <p class="spots">{{ activity.spots_taken }} / {{ activity.max_participants }} spots filled</p>

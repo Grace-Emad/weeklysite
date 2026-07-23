@@ -278,7 +278,13 @@ nav a, .link-button {
     max-width: 100px;
 }
 
-/*Content Page*/
+/* Activity List Page */
+.act-type-text {
+    font-weight: 700;
+    color: var(--primary-color)
+}
+
+/* Content Page */
 
 .cont-container {
     margin-top: 4rem;
